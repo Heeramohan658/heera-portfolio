@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Heera Mohan Sardar, BCA student and aspiring software developer.">
+    <meta name="theme-color" content="#050816">
+    <title>{{ profile.name }} | Developer Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="page-glow glow-a" aria-hidden="true"></div>
+    <div class="page-glow glow-b" aria-hidden="true"></div>
+
+    <nav class="navbar">
+        <a class="logo" href="#home" aria-label="Home">HM<span>.</span></a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <div class="nav-links" id="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero section-shell" id="home">
+            <div class="hero-content">
+                <p class="eyebrow"><span class="status-dot"></span> WELCOME TO MY DIGITAL WORLD</p>
+                <h1>Hi, I'm <span class="gradient-text">Heera Mohan Sardar</span></h1>
+                <h2 class="typing-line">Aspiring <span id="role-text">Software Developer</span><span class="cursor">|</span></h2>
+                <p class="intro">
+                    I am a BCA student interested in Python, web development, artificial intelligence,
+                    and building creative digital experiences.
+                </p>
+                <p class="location">⌖ {{ profile.location }}</p>
+                <div class="buttons">
+                    <a class="btn primary" href="#contact">Contact Me <span>↗</span></a>
+                    <a class="btn secondary" href="#projects">Explore Projects</a>
+                </div>
+                <div class="socials">
+                    <a href="{{ profile.github }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                    <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                    <a href="mailto:{{ profile.email }}">Email ↗</a>
+                </div>
+            </div>
+
+            <div class="orb-wrap" aria-label="Animated portfolio graphic">
+                <div class="orb"><div class="orb-core">HM</div></div>
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+                <div class="orbit orbit-three"></div>
+                <span class="float-tag tag-one">Python</span>
+                <span class="float-tag tag-two">Web Dev</span>
+                <span class="float-tag tag-three">AI / ML</span>
+            </div>
+            <a class="scroll-hint" href="#about">SCROLL TO EXPLORE <span>↓</span></a>
+        </section>
+
+        <section class="section section-shell" id="about">
+            <div class="section-heading">
+                <p class="eyebrow">A LITTLE ABOUT ME</p>
+                <h2>Learning today. <span class="gradient-text">Building tomorrow.</span></h2>
+            </div>
+            <p class="section-text">
+                I am pursuing a Bachelor of Computer Applications at Graphic Era Hill University.
+                I enjoy learning programming, solving problems, and developing projects that turn
+                ideas into useful applications. I am continuing to grow my skills through practice
+                and project-based learning.
+            </p>
+            <div class="stats-grid">
+                <article class="stat-card"><span class="stat-number">BCA</span><span class="stat-label">Current degree</span></article>
+                <article class="stat-card"><span class="stat-number">Python</span><span class="stat-label">Learning & building</span></article>
+                <article class="stat-card"><span class="stat-number">AI/ML</span><span class="stat-label">Area of interest</span></article>
+            </div>
+        </section>
+
+        <section class="section section-shell" id="skills">
+            <div class="section-heading">
+                <p class="eyebrow">WHAT I'M EXPLORING</p>
+                <h2>Skills & <span class="gradient-text">Interests</span></h2>
+            </div>
+            <p class="section-text">These are learning areas and interests, not a claim of professional mastery. Update them as your skills grow.</p>
+            <div class="skills-grid">
+                <article class="skill-card"><div class="skill-icon">Py</div><h3>Python</h3><p>Programming fundamentals and application development</p></article>
+                <article class="skill-card"><div class="skill-icon">⌘</div><h3>Web Development</h3><p>HTML, CSS, JavaScript, and Flask</p></article>
+                <article class="skill-card"><div class="skill-icon">AI</div><h3>AI / Machine Learning</h3><p>Exploring models and practical AI projects</p></article>
+                <article class="skill-card"><div class="skill-icon">DB</div><h3>Databases</h3><p>Learning data storage and database integration</p></article>
+            </div>
+        </section>
+
+        <section class="section section-shell" id="education">
+            <div class="section-heading">
+                <p class="eyebrow">MY ACADEMIC JOURNEY</p>
+                <h2>Education <span class="gradient-text">Timeline</span></h2>
+            </div>
+            <div class="timeline">
+                {% for item in education %}
+                <article class="edu-card">
+                    <span class="year">{{ item.year }}</span>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.school }}</p>
+                    <span class="tag">{{ item.detail }}</span>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section section-shell" id="projects">
+            <div class="section-heading">
+                <p class="eyebrow">THINGS I'M WORKING TOWARD</p>
+                <h2>Featured <span class="gradient-text">Projects</span></h2>
+            </div>
+            <p class="section-text">These cards describe project ideas. Replace the descriptions or add repository links when your code is ready to share.</p>
+            <div class="projects-grid">
+                {% for project in projects %}
+                <article class="project-card">
+                    <div class="project-art"><span class="project-symbol">{{ "%02d"|format(loop.index) }}</span><span class="project-cross">✳</span></div>
+                    <div class="project-body">
+                        <h3>{{ project.title }}</h3>
+                        <p>{{ project.description }}</p>
+                        <div class="project-tags">
+                            {% for tag in project.tags %}<span>{{ tag }}</span>{% endfor %}
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="section contact-section section-shell" id="contact">
+            <div class="contact-panel">
+                <p class="eyebrow">LET'S CONNECT</p>
+                <h2>Have an idea? <span class="gradient-text">Let's talk.</span></h2>
+                <p class="section-text">Interested in collaboration, technology, or exciting projects? Feel free to reach out.</p>
+                <a class="btn primary" href="mailto:{{ profile.email }}?subject=Portfolio%20Contact">Email Me <span>↗</span></a>
+                <div class="contact-links">
+                    <a href="{{ profile.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                    <a href="{{ profile.github }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                    <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>© <span id="year"></span> {{ profile.name }} <span class="footer-dot">·</span> Built with Python, Flask & Three.js</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
